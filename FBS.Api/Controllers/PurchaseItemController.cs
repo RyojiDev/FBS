@@ -1,6 +1,8 @@
 
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using FBS.Domain.Command;
+using FBS.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FBS.Api.Controllers
@@ -9,18 +11,23 @@ namespace FBS.Api.Controllers
     [Route("api/[controller]")]
     public class PurchaseItemController : ControllerBase
     {
-        [Route("")]
+        [Route("GetAllPurchaseItem")]
         [HttpGet]
         public async Task<IActionResult> GetAllPurchaseItem()
         {
-            return null;
+            return await Task.FromResult(Ok(new List<PurchaseItem>()
+            {
+               new PurchaseItem("Ouro branco", true, new Category("Chocolate"))
+            })).ConfigureAwait(false);
         }
 
-        [Route("")]
+        [Route("AddPurchaseItem")]
         [HttpPost]
         public async Task<IActionResult> AddPurchaseItem([FromBody] AddPurchaseItemCommand addCommand)
         {
-            return null;
+            if(!ModelState.IsValid)
+                return null;
+            return await Task.FromResult(Ok(addCommand));
         }
     }
 }

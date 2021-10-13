@@ -1,8 +1,13 @@
 namespace FBS.Shared.Response
 {
-    public class GenericResponse where T : <T>
+    public class GenericResponse
     {
-        public GenericResponse(string message, bool success, T data)
+        public GenericResponse()
+        {
+
+        }
+
+        public GenericResponse(string message, bool success, object data)
         {
             this.Message = message;
             this.Success = success;
@@ -11,6 +16,6 @@ namespace FBS.Shared.Response
 
         public string Message { get; set; }
         public bool Success { get; set; }
-        public T Data { get; set; }
+        public object Data { get; set; }
     }
 }
