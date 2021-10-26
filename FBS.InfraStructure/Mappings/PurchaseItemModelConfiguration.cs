@@ -18,7 +18,7 @@ namespace FBS.InfraStructure.Mappings
             builder.Property(p => p.Name).HasColumnName("Name");
             builder.Property(p => p.MissingItem).HasColumnName("MissingItem");
             builder.Property(p => p.AddDate).HasColumnName("AddDate");
-            builder.HasOne(p => p.Category).WithOne("Id");
+            builder.HasOne(p => p.Category);
         }
     }
 }

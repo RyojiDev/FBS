@@ -1,4 +1,5 @@
 ﻿using FBS.Domain.Models;
+using FBS.InfraStructure.Mappings;
 using Microsoft.EntityFrameworkCore;
 
 namespace FBS.InfraStructure.DataBase
@@ -16,7 +17,8 @@ namespace FBS.InfraStructure.DataBase
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
+            builder.ApplyConfiguration(new PurchaseItemModelConfiguration());
+            builder.ApplyConfiguration(new CategoryModelConfiguration());
         }
     }
 }

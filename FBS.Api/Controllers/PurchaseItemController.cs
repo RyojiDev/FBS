@@ -1,9 +1,9 @@
-
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using FBS.Domain.Command;
-using FBS.Domain.Models;
+using FBS.Domain.Interfaces;
+using FBS.Domain.Querys;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace FBS.Api.Controllers
 {
@@ -11,14 +11,21 @@ namespace FBS.Api.Controllers
     [Route("api/[controller]")]
     public class PurchaseItemController : ControllerBase
     {
+        private readonly IPurchaseItemService _purchaseItemService;
+        private readonly IMediator _mediator;
+        public PurchaseItemController(IPurchaseItemService purchaseItemService, IMediator mediator)
+        {
+            this._purchaseItemService = purchaseItemService;
+            this._mediator = mediator;
+
+        }
+
         [Route("GetAllPurchaseItem")]
         [HttpGet]
         public async Task<IActionResult> GetAllPurchaseItem()
         {
-            return await Task.FromResult(Ok(new List<PurchaseItem>()
-            {
-               new PurchaseItem("Ouro branco", true, new Category("Chocolate"))
-            })).ConfigureAwait(false);
+            var purchaseItemsList = await _mediator.Send(new GetAllPurchaseItemsQuery());
+            return await Task.FromResult(Ok(purchaseItemsList));
         }
 
         [Route("AddPurchaseItem")]
@@ -27,7 +34,10 @@ namespace FBS.Api.Controllers
         {
             if(!ModelState.IsValid)
                 return null;
-            return await Task.FromResult(Ok(addCommand));
+            
+            var item = await _mediator.Send(addCommand);
+
+            return await Task.FromResult(Ok(item));
         }
     }
 }
