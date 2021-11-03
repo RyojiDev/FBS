@@ -1,14 +1,13 @@
 ﻿using FBS.Domain.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace FBS.InfraStructure.Repositories
+namespace FBS.Domain.Interfaces
 {
     public interface IPurchaseItemRepository
     {
-        void SavePurchaseItem(PurchaseItem item);
+        Task SavePurchaseItem(PurchaseItem item);
+
+        List<PurchaseItem> GetAllPurchaseItem();
     }
 }

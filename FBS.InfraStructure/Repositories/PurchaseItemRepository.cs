@@ -1,10 +1,9 @@
 ﻿using FBS.Domain.Interfaces;
 using FBS.Domain.Models;
 using FBS.InfraStructure.DataBase;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FBS.InfraStructure.Repositories
@@ -18,10 +17,17 @@ namespace FBS.InfraStructure.Repositories
             _dbContext = dbcontext;
         }
 
-        public void SavePurchaseItem(PurchaseItem item)
+        public List<PurchaseItem> GetAllPurchaseItem()
         {
-            _dbContext.PurchaseItems.Add(item);
+           var purchaseItems = _dbContext.PurchaseItems.Include( p=> p.Category).ToList();
+            return purchaseItems;
+        }
+
+        public async Task SavePurchaseItem(PurchaseItem item)
+        {
+            await _dbContext.PurchaseItems.AddAsync(item).ConfigureAwait(true);
             _dbContext.SaveChanges();
         }
+
     }
 }

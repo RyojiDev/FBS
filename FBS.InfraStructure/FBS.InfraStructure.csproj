@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FBS.Domain\FBS.Domain.csproj" />
+    <ProjectReference Include="..\FBS.Services\FBS.Services\FBS.Services\FBS.Services.csproj" />
   </ItemGroup>
 
 </Project>

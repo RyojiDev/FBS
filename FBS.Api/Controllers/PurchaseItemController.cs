@@ -11,11 +11,9 @@ namespace FBS.Api.Controllers
     [Route("api/[controller]")]
     public class PurchaseItemController : ControllerBase
     {
-        private readonly IPurchaseItemService _purchaseItemService;
         private readonly IMediator _mediator;
         public PurchaseItemController(IPurchaseItemService purchaseItemService, IMediator mediator)
         {
-            this._purchaseItemService = purchaseItemService;
             this._mediator = mediator;
 
         }
