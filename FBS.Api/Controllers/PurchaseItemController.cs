@@ -3,6 +3,7 @@ using FBS.Domain.Interfaces;
 using FBS.Domain.Querys;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace FBS.Api.Controllers
@@ -37,5 +38,6 @@ namespace FBS.Api.Controllers
 
             return await Task.FromResult(Ok(item));
         }
+
     }
 }

@@ -1,8 +1,16 @@
+using FBS.Domain.Dto.Response;
+using FBS.Shared.Response;
+using MediatR;
+
 namespace FBS.Domain.Command
 {
-    public class AddPurchaseItemCommand
+    public class AddPurchaseItemCommand : IRequest<GenericResponse<PurchaseItemDto>>
     {
-        public string Name { get; set; }
-        public string CategoryName { get; set; }
+        public AddPurchaseItemCommand(PurchaseItemDto purchaseItemDto)
+        {
+            this.PurchaseItemDto = purchaseItemDto;
+        }
+
+        public PurchaseItemDto PurchaseItemDto { get; set; }
     }
 }
